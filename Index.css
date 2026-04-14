@@ -1,0 +1,60 @@
+#contenedor{
+    background-color: bisque;
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 300px;
+    height: 500px;
+    justify-self: center;
+    margin: 20px;
+    margin-top: 200px;
+}
+
+#inicio{
+    background-color: aqua;
+    justify-self: end;
+    margin: 20px;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    width: 50px;
+}
+
+#texto{
+    justify-self: center;
+    margin: 10px;
+    font-size: 40px;
+}
+
+#inputs{
+    justify-self: center;
+}
+
+input:focus{
+    outline: solid lightblue;
+}
+
+#send{
+    background-color: aqua;
+    margin: 20px;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*--------------------------------------*/
+
+body{
+    background-color: azure;
+}
+
+header{
+    background-color: gray;
+}
+
+footer{
+    background-color: gray;
+}
