@@ -1,24 +1,40 @@
 #contenedor{
-    background-color: bisque;
-    border: 2px solid black;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 15px 35px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
     width: 300px;
     height: 500px;
-    justify-self: center;
+    justify-self: end;
+    align-self: center;
     margin: 20px;
-    margin-top: 200px;
+    margin-right: 50px;
+    grid-area: login;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#contenedor:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 35px 60px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.4), 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 #inicio{
-    background-color: aqua;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
     justify-self: end;
     margin: 20px;
     padding: 8px;
-    border: 2px solid black;
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
     width: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#inicio:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 #texto{
@@ -32,29 +48,59 @@
 }
 
 input:focus{
-    outline: solid lightblue;
+    outline: solid #1e3c72;
+    box-shadow: 0 0 10px rgba(30, 60, 114, 0.3);
 }
 
 #send{
-    background-color: aqua;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
     margin: 20px;
     padding: 8px;
-    border: 2px solid black;
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /*--------------------------------------*/
 
 body{
-    background-color: azure;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "header header header"
+        "espacio1 login carrusel"
+        "footer footer footer";
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
 }
 
 header{
-    background-color: gray;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    grid-area: header;
 }
 
 footer{
-    background-color: gray;
+    background: linear-gradient(135deg, #37474f 0%, #455a64 100%);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    grid-area: footer;
 }

@@ -79,10 +79,16 @@ header p {
     background: rgba(255, 255, 255, 0.95);
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 15px 35px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     text-align: center;
     min-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 35px 60px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.4), 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 #productos p {
