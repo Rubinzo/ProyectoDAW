@@ -10,28 +10,32 @@ const validar = document.getElementById("validar");
 contraseña2.style.display = "none";
 validar.style.display = "none";
 let login = true;
+
+function limpiarCampos() {
+    usuario.value = "";
+    contraseña1.value = "";
+    contraseña2.value = "";
+}
+
 inicio.addEventListener("click", function(){
-    if(login == true){
-        inicio.innerHTML = "Login";
+    login ? inicio.innerHTML = "Login" : inicio.innerHTML = "Register";
+    if(login){
         texto.innerHTML = "Register";
         send.innerHTML = "Registrarte";
-        usuario.value = "";
-        contraseña1.value = "";
+        limpiarCampos();
         contraseña2.style.display = "block";
         validar.style.display = "block";
         login = false;
     }else{
-        inicio.innerHTML = "Register";
         texto.innerHTML = "Login";
         send.innerHTML = "Iniciar sesión";
-        usuario.value = "";
-        contraseña1.value = "";
-        contraseña2.value = "";
+        limpiarCampos();
         contraseña2.style.display = "none";
         validar.style.display = "none";
         login = true;
     }
 });
+
 const myHeaders = new Headers();
 
 send.addEventListener("click", sesion);
