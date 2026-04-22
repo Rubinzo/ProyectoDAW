@@ -87,7 +87,7 @@ header::before {
     width: 250px;
     padding: 10px 15px;
     border-radius: 25px;
-    border: 2px solid #bbdefb;
+    border: none;
     text-align: center;
     font-size: 14px;
     margin: 20px auto;

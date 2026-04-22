@@ -46,7 +46,51 @@ function sesion() {
     let contraseña;
 
     if(login == true){
+        usuarioValue = usuario.value;
+        contraseña = contraseña1.value;
+        console.log("Nombre: " , usuarioValue);
+        console.log("Contraseña: " , contraseña);
+        let json = {
+            usuario: usuario.value,
+            contraseña: contraseña1.value
+        };
+        console.log(json)
+        const sendLogin = {
+            method: "POST",
+            headers: myHeaders,
+            redirect: "follow",
+            body: JSON.stringify(json)
+        };
+        usuario.value = "";
+        contraseña1.value = "";
+        fetch("http://localhost:8080/user/login", sendLogin)
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result);
 
+                    if(result.registrado == true){
+                        if(result.equal == true){
+                            mensaje.innerText = "Sesión iniciada correctamente";
+                            mensaje.style.color = "green";
+                            setTimeout(() =>{
+                                window.location.href = "Tienda.html"; 
+                            }, 1500);
+                        }else{
+                            mensaje.innerText ="La contraseña no es correcta";
+                            mensaje.style.color = "red";
+                            setTimeout(() =>{
+                                mensaje.innerText ="";
+                            }, 1500);
+                        }
+                    }else{
+                        mensaje.innerText ="Ese usuario no está registrado";
+                        mensaje.style.color = "red";
+                        setTimeout(() =>{
+                            mensaje.innerText ="";
+                        }, 1500);
+                    }
+                })
+                .catch((error) => console.error(error));
     }else{
         if (contraseña1.value == contraseña2.value) {
             usuarioValue = usuario.value;
@@ -101,3 +145,9 @@ function sesion() {
 }
 
 
+  let currentIndex = 1;
+  const totalSlides = 3;
+  setInterval(() => {
+    currentIndex = (currentIndex % totalSlides) + 1;
+    document.getElementById(`slide-${currentIndex}`).checked = true;
+  }, 4000);

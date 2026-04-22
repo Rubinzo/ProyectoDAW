@@ -38,11 +38,9 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                         for(let i = 0; i < result.length; i++){
                             let nombreInput = result[i].nombre.toLowerCase();
                             if(nombreInput.includes(inputNombre.value.toLowerCase())){
-                                console.log("coincide")
                                 producto[i].style.display ="block";
                             
                             }else{
-                                console.log("No coincide");
                                 producto[i].style.display = "none";
                                 
                             }
