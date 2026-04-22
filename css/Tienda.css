@@ -104,10 +104,11 @@ header::before {
 /* Contenedor principal */
 #contenedorProductos {
     flex: 1;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .producto {

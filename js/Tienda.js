@@ -49,5 +49,5 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                 })
                 .catch((error) => console.error(error));
 
-//Buscador por nombre
 
+//localStorage 
