@@ -148,7 +148,8 @@ footer{
                 position: relative;
                 box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
                 margin-top: 26px;
-                width: 50%;
+                width: 100%;
+                max-width: 550px;
             }
             .slide-inner {
                 position: relative;
@@ -250,3 +251,26 @@ footer{
                 text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), 
                      -1px 0px 2px rgba(255, 255, 255, 0);
             }
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: 
+            "header"
+            "login"
+            "carrusel"
+            "footer";
+    }
+
+    #contenedor {
+        justify-self: center;
+        margin: 20px;
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .slide {
+        width: 90%;
+        margin: 20px auto;
+    }
+}
