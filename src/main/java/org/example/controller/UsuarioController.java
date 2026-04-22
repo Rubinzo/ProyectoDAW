@@ -55,6 +55,32 @@ public class UsuarioController {
                 return;
             }
 
+            if (path.equals("/user/login")) {
+                addCorsHeaders(exchange);
+                String body = new String(
+                        exchange.getRequestBody().readAllBytes(),
+                        StandardCharsets.UTF_8);
+                String stringResponse = body;
+                Gson gson = new Gson();
+                JsonObject jsonResponse = gson.fromJson(stringResponse, JsonObject.class);
+                String user = jsonResponse.get("usuario").getAsString();
+                String contraseña = jsonResponse.get("contraseña").getAsString();
+                boolean userFind = usuario.findByUser(user);
+                JsonObject response = new JsonObject();
+                boolean registrado = false;
+                if (userFind) {
+                    registrado = true;
+                }
+                boolean equal = usuario.comparePassword(user, contraseña);
+                response.addProperty("user", user);
+                response.addProperty("registrado", registrado);
+                response.addProperty("equal", equal);
+                if (registrado) {
+                    usuario.insertarUsuario(user, contraseña);
+                }
+                sendResponse(exchange, 200, response.toString());
+                return;
+            }
 
 
             sendResponse(exchange, 404, "Endpoint dogs no válido");

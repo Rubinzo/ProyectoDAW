@@ -31,10 +31,10 @@ public class Main {
 
             System.out.println("Servidor iniciado en http://localhost:8080/user/register");
             Camisetas camisetas = new Camisetas();
-            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN REAL MADRID 2024-25", 39.99, "https://tnorth.es/cdn/shop/files/RMCFMZ0195-01-1_1.webp?v=1773682744&width=832");
-            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN SEVILLA 2024-2025", 34.95, "https://tnorth.es/cdn/shop/files/qeF7zREXHME3ifW.jpg?v=1773683280&width=832");
-            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN BRASIL 2026 | MUNDIAL", 39.99, "https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832");
-
+//            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN REAL MADRID 2024-25", 39.99, "https://tnorth.es/cdn/shop/files/RMCFMZ0195-01-1_1.webp?v=1773682744&width=832", "España", false, "Real Madrid");
+//            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN SEVILLA 2024-2025", 34.95, "https://tnorth.es/cdn/shop/files/qeF7zREXHME3ifW.jpg?v=1773683280&width=832", "España", false, "Sevilla");
+//            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN BRASIL 2026 | MUNDIAL", 39.99, "https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832", "Brasil", true, "Brasil");
+            camisetas.listarCamisetas();
     }
 
     public static void crearServer() throws IOException {

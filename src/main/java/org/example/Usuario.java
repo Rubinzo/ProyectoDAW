@@ -72,6 +72,38 @@ public class Usuario {
         return found;
     }
 
+    public boolean comparePassword(String user, String contraseña) {
+        JsonObject jsonRaiz = new JsonObject();
+        boolean equal = false;
+        String sql = "SELECT id, usuario, contraseña FROM usuarios WHERE usuario = ?";
+
+        try (Connection conn = ConnectionBBDD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Sustituye el ? por el nombre que queremos buscar.
+            stmt.setString(1, user);
+
+            // Ejecuta la consulta SELECT.
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Si existe al menos un usuario con ese nombre...
+                String contraseñaBaseDatos = rs.getString("contraseña");
+                if (contraseñaBaseDatos.equals(contraseña)) {
+                    equal = true;
+                }
+            } else {
+                System.out.println("No existe ningún usuario con el nombre: " + user);
+                equal = false;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return equal;
+    }
+
     public boolean findByDNI(String dni) {
         boolean found = true;
         String sql = "SELECT id, dni FROM usuarios WHERE dni = ?";

@@ -26,12 +26,16 @@ public class Camisetas {
 
             while (rs.next()) {
                 // Obtiene los datos de cada columna ("id" y "nombre") y los imprime por consola.
-                System.out.println(rs.getInt("id") + " - " + rs.getString("nombre")  +" | " + rs.getDouble("precio")+" | " + rs.getString("img"));
+                System.out.println(rs.getInt("id") + " - " + rs.getString("nombre")  +" | " + rs.getDouble("precio")+" | " + rs.getString("img")+" | " +
+                        rs.getString("pais")  +" | " + rs.getString("seleccion")  +" | " + rs.getString("equipo")  +" | " );
                 JsonObject camiseta = new JsonObject();
                 camiseta.addProperty("id", rs.getInt("id"));
                 camiseta.addProperty("nombre", rs.getString("nombre"));
                 camiseta.addProperty("precio", rs.getDouble("precio"));
                 camiseta.addProperty("img", rs.getString("img"));
+                camiseta.addProperty("pais", rs.getString("pais"));
+                camiseta.addProperty("seleccion", rs.getBoolean("seleccion"));
+                camiseta.addProperty("equipo", rs.getString("equipo"));
                 jsonRaiz.add(camiseta);
 
             }
@@ -100,8 +104,8 @@ public class Camisetas {
 
 
 
-    public void insertarCamisetas(String nombre, double precio, String img) {
-        String sql = "INSERT INTO camisetas (nombre, precio, img) VALUES (?, ?, ?)";
+    public void insertarCamisetas(String nombre, double precio, String img, String pais, boolean seleccion, String equipo) {
+        String sql = "INSERT INTO camisetas (nombre, precio, img, pais, seleccion, equipo) VALUES (?, ?, ?, ?, ?, ?)";
 
 
         try (Connection conn = ConnectionBBDD.getConnection();
@@ -110,11 +114,14 @@ public class Camisetas {
             stmt.setString(1, nombre);
             stmt.setDouble(2, precio);
             stmt.setString(3, img);
+            stmt.setString(4, pais);
+            stmt.setBoolean(5, seleccion);
+            stmt.setString(6, equipo);
 
             stmt.executeUpdate();
 
             System.out.println("Camiseta insertada: " + nombre);
-            listarCamisetas();
+
 
         } catch (Exception e) {
             e.printStackTrace();
