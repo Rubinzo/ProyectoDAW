@@ -17,11 +17,16 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                         const nombre = result[i].nombre;
                         const precio = result[i].precio;
                         const img = result[i].img;
+                        const pais = result[i].pais;
+                        const seleccion = result[i].seleccion;
+                        const equipo = result[i].equipo;
+
 
 
                         contenedorProductos.innerHTML += `
                         <div class="producto" data-nombre = ${nombre} 
-                        data-status="activo">
+                        data-status="activo" data-pais="${equipo} 
+                        data-seleccion="${seleccion}" data-equipo="${equipo}">
                             <p>${nombre}</p>
                             <img src="${img}" alt="${nombre}">
                             <p>${precio}€</p>

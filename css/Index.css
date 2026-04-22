@@ -72,6 +72,7 @@ input:focus{
 
 
 body{
+    margin: 0;
     font-family: 'Arial', sans-serif;
     min-height: 100vh;
     display: grid;
@@ -84,31 +85,29 @@ body{
     background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
 }
 
-header{
+header {
+    grid-area: header;
+    height: 50px;
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
-    padding: 1rem 0;
-    text-align: center;
+    padding: 2rem 0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
-    grid-area: header;
-    margin-bottom: 90px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:  "left center right";
+}
+
+
+.header-center {
+    grid-area: center;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-header p {
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-    z-index: 1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 0;
-}
+
 
 header::before {
     content: '';
@@ -119,6 +118,17 @@ header::before {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     animation: shine 3s infinite;
+}
+
+.header-center p {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
 }
 
 @keyframes shine {

@@ -14,14 +14,36 @@
             <img src="/Img/carrito-de-compras.png" alt="Carrito">
         </div>
     </header>
-    <input type="text" placeholder="Nombre de la camiseta" id="inputNombre">
-    <div id="contenedorProductos">
+    <nav id="nav">
+        <nav id="filtros">
+            <input type="text" placeholder="Nombre de la camiseta" id="inputNombre">
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+            <label class="form-check-label" for="checkDefault">Selección</label>
+            
+            <div id="selector">
+                <select name="curso" id="curso">
+                    <optgroup label="DAW">
+                        <option value="Primero">Primero</option>
+                        <option value="Segundo">Segundo</option>
+                    </optgroup>
+                    <optgroup label="DAM">
+                        <option value="Primero">Primero</option>
+                        <option value="Segundo">Segundo</option>
+                    </optgroup>
+                </select>
+            </div>
+             
+        </nav>    
+        
+        <div id="contenedorProductos">
 
-    </div>
-    <footer>
-        <p>Créditos</p>
-    </footer>
-    
+
+        </div>
+        <footer>
+            <p>Créditos</p>
+        </footer>
+        </nav>
     <script src="/js/Tienda.js"></script>
 </body>
 </html>
