@@ -37,7 +37,6 @@ public class Main {
 //        camisetas.insertarCamisetas("EQUIPACIÓN RETRO FC BARCELONA 2008-09 (FINAL ROMA)", 39.99, "https://tnorth.es/cdn/shop/files/big_10_9748ad9f-83c5-48f1-818e-c724bce68d67.jpg?v=1773682851&width=832", "España", false, "FC Barcelona");
 //        camisetas.insertarCamisetas("TERCERA EQUIPACIÓN BAYERN MUNICH 2024-25", 39.99, "https://tnorth.es/cdn/shop/files/9H4Tk2Bf75aYrB4.jpg?v=1773683292&width=832", "Alemania", false, "Bayern Munich");
 //        camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN ARGENTINA 2026 | MUNDIAL", 39.99, "https://tnorth.es/cdn/shop/files/JM5897.jpg?v=1773682575&width=832", "Argentina", true, "Argentina");
-
             camisetas.listarCamisetas();
     }
 
