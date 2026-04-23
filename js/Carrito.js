@@ -5,6 +5,7 @@ console.log("PRASDASD" +productos)
 productos = JSON.parse(productos)
 
 let precioProductos = 0;
+let cantidadProducto = 1;
 
 productos.forEach(element => {
     console.log(element)
@@ -21,10 +22,13 @@ productos.forEach(element => {
                         <h3>${nombre}</h3>
                         <p class="precio">${precio}</p>
                     </div>
-                    <div class="carrito-controles">
-                        <button class="btn-cantidad btn-menos">-</button>
-                        <span class="cantidad">1</span>
-                        <button class="btn-cantidad btn-mas">+</button>
+                    <div class="carrito-controles" 
+                    data-nombre="${nombre}"
+                    data-precio="${precio}" data-img="${img}">
+                        <button class="btn-cantidad btnMenos">-</button>
+                        <span class="cantidad" data-cantidad="${cantidadProducto}"
+                        >${cantidadProducto}</span>
+                        <button class="btn-cantidad btnMas">+</button>
                     </div>
                     <div class="carrito-subtotal">
                         <p>${precio}</p>
@@ -37,7 +41,7 @@ productos.forEach(element => {
 });
 
 const carritoResumen = document.getElementById("carritoResumen");
-let precioTotal = precioProductos + 4.99;
+let precioTotal = parseFloat(precioProductos.toFixed(1)) + 4.99;
 carritoResumen.innerHTML += `
         
             <h2>Resumen del pedido</h2>
@@ -55,3 +59,23 @@ carritoResumen.innerHTML += `
             </div>
             <button class="btn-comprar">Proceder al pago</button>
 `
+
+const botones = document.querySelectorAll(".btnMas");
+
+                
+botones.forEach(boton => {
+    boton.addEventListener("click",sumarPedido);
+});
+
+function sumarPedido(evento){
+    console.log("asdadsd")
+    const pedido = evento.target.parentElement;
+    const cantidad = pedido.querySelector(".cantidad");
+    let nuevaCantidad = parseInt(pedido.dataset.cantidad) + 1;
+    pedido.dataset.cantidad = nuevaCantidad;
+    console.log(nuevaCantidad);
+    cantidad.innerText = nuevaCantidad;
+    
+}
+
+

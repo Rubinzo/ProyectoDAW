@@ -1,6 +1,7 @@
 //Generar tarjetas
 const contenedorProductos = document.getElementById("contenedorProductos");
 
+
 //localStorage 
 const user = document.getElementById("user");
 let usuario = localStorage.getItem("usuario");
@@ -85,8 +86,6 @@ function elegirProducto(evento){
     console.log(producto.dataset);
     let precio = Number(producto.dataset.precio);
     
-    const a = document.getElementById("a");
-    a.innerText = precio;
 
     let json = {
         nombre: producto.dataset.nombre,
@@ -129,3 +128,10 @@ carritoBoton.addEventListener("click",function(){
     }, 1000);
 });
 
+//Borrar cache
+const borrar = document.getElementById("borrar");
+borrar.addEventListener("click",function(){
+    console.log("Cache borrado");
+    localStorage.setItem("seleccionados", "");
+
+});
