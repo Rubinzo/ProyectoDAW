@@ -99,7 +99,8 @@ function elegirProducto(evento){
     
     let igual = false;
     if(productos.length == 0){
-        console.log("Añadiendo producto");
+        const imgCarrito = document.getElementById("imgCarrito");
+        imgCarrito.src ="/Img/carrito-de-compras-lleno.png"
         productos.push(json);
         localStorage.setItem("seleccionados", JSON.stringify(productos))
     }else{
@@ -121,10 +122,10 @@ function elegirProducto(evento){
     console.log(productos)
     
 }
-const asd = document.getElementById("asd");
-asd.addEventListener("click",function(){
+const carritoBoton = document.getElementById("carritoBoton");
+carritoBoton.addEventListener("click",function(){
     setTimeout(() =>{
         window.location.href = "Carrito.html"; 
-    }, 1500);
+    }, 1000);
 });
 

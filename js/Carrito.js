@@ -32,5 +32,26 @@ productos.forEach(element => {
                     <button class="btn-eliminar">Eliminar</button>
                 </div>
     `
-
+    precioProductos = parseFloat(precio) + precioProductos;
+    console.log(precioProductos)
 });
+
+const carritoResumen = document.getElementById("carritoResumen");
+let precioTotal = precioProductos + 4.99;
+carritoResumen.innerHTML += `
+        
+            <h2>Resumen del pedido</h2>
+            <div class="resumen-linea">
+                <span>Subtotal:</span>
+                <span id="subtotal">${precioProductos}€</span>
+            </div>
+            <div class="resumen-linea">
+                <span>Envío:</span>
+                <span id="envio">4.99€</span>
+            </div>
+            <div class="resumen-linea total">
+                <span>Total:</span>
+                <span id="total">${precioTotal}€</span>
+            </div>
+            <button class="btn-comprar">Proceder al pago</button>
+`
