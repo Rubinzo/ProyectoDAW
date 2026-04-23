@@ -65,6 +65,7 @@ function sesion() {
             redirect: "follow",
             body: JSON.stringify(json)
         };
+        localStorage.setItem("usuario", usuario.value);
         usuario.value = "";
         contraseña1.value = "";
         fetch("http://localhost:8080/user/login", sendLogin)
