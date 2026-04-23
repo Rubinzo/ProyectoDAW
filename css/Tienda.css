@@ -90,7 +90,7 @@ header::before {
     border: none;
     text-align: center;
     font-size: 14px;
-    margin: 20px auto;
+    margin: 20px;
     display: block;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -194,6 +194,10 @@ footer p {
 }
 
 /* Estilos del Carrito */
+#headerCarrito{
+    height: 115px;
+}
+
 #contenedorCarrito {
     flex: 1;
     padding: 2rem;
@@ -365,4 +369,28 @@ footer p {
     .carrito-resumen {
         max-width: 90%;
     }
+}
+
+#filtros{
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-check{
+    display: flex;
+    align-items: center;
+}
+
+.form-check-label{
+    margin-left: 5px;
+}
+
+#selector{
+    margin-left: 20px;
+}
+
+#navCarrito{
+    display: flex;
 }

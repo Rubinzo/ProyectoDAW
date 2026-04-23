@@ -25,13 +25,14 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                         const seleccion = result[i].seleccion;
                         const equipo = result[i].equipo;
 
-
+                        
 
                         contenedorProductos.innerHTML += `
-                        <div class="producto" data-nombre = ${nombre}" 
+                        <div class="producto" data-nombre = "${nombre}" 
                         data-status="null" data-pais="${pais}" 
                         data-seleccion="${seleccion}" data-equipo="${equipo}"
                         data-precio="${precio}" data-img="${img}"
+                        data-id="${i}"
                             <p>${nombre}</p>
                             <img src="${img}" alt="${nombre}">
                             <p>${precio}€</p>
@@ -58,7 +59,14 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                         }
                     }
 
-                    elegirProducto();
+                const productos = document.querySelectorAll(".producto");
+                const botones = document.querySelectorAll(".boton");
+
+                
+                    botones.forEach(boton => {
+                        boton.addEventListener("click",elegirProducto)
+                    });
+                    
                 })
                 .catch((error) => console.error(error));
 
@@ -68,44 +76,55 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
 
 
                 
-function elegirProducto(){
-    const productos = document.querySelectorAll(".producto");
-    const botones = document.querySelectorAll(".boton");
-
-    
-        botones.forEach(boton => {
-            boton.addEventListener("click",subirContador)
-        });
-        
-
-}
 
 
-
-function subirContador(evento){
+ let productos = []
+function elegirProducto(evento){
+   
     const producto = evento.target.parentElement;
     console.log(producto.dataset);
     let precio = Number(producto.dataset.precio);
-    console.log(precio);
     
     const a = document.getElementById("a");
     a.innerText = precio;
 
-    // actualizarContador();
+    let json = {
+        nombre: producto.dataset.nombre,
+        precio: producto.dataset.precio,
+        img: producto.dataset.img,
+        id: producto.dataset.id
+    }
 
-    // let ganadorActual = producto.dataset.nombre;
-    // const listaP = document.querySelectorAll("div[data-product]");
 
+    
+    let igual = false;
+    if(productos.length == 0){
+        console.log("Añadiendo producto");
+        productos.push(json);
+        localStorage.setItem("seleccionados", JSON.stringify(productos))
+    }else{
+        for(let i = 0; i < productos.length; i++ ){
+            console.log("Element" +productos[i])
+            if(JSON.stringify(productos[i]) === JSON.stringify(json)){
+                console.log("igual");
+                igual = true;
+            }
+        }
+        if(!igual){
+                console.log("Añadiendo producto2");
+                productos.push(json);
+                localStorage.setItem("seleccionados", JSON.stringify(productos));
+        }
 
-    // if(votoProducto > mayorVotos){
-    //     listaP.forEach((producto) => {
-    //     producto.dataset.ganador = false;
-    //     });
-    //     mayorVotos = votoProducto;
-    //     ganadorActual = producto.dataset.nombre;
-    //     nombre = ganadorActual;
-    //     producto.dataset.ganador = true;
-    //     ganador.innerHTML = `${ganadorActual}`;
-    // }
+    }
 
+    console.log(productos)
+    
 }
+const asd = document.getElementById("asd");
+asd.addEventListener("click",function(){
+    setTimeout(() =>{
+        window.location.href = "Carrito.html"; 
+    }, 1500);
+});
+
