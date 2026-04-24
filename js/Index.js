@@ -121,9 +121,10 @@ function sesion() {
                 .then((result) => {
                     console.log(result);
 
-                    if(result.registrado == false){
+                    if(result.registrado == true){
                         mensaje.innerText = "Usuario registrado correctamente";
                         mensaje.style.color = "green";
+                        localStorage.setItem("usuario", result.user);
                         setTimeout(() =>{
                             window.location.href = "Tienda.html"; 
                         }, 1500);

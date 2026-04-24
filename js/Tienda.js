@@ -37,7 +37,7 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                             <p>${nombre}</p>
                             <img src="${img}" alt="${nombre}">
                             <p>${precio}€</p>
-                            <button class="boton">Añadir</button>
+                            <button class="send">Añadir</button>
                         </div>
                         `;
 
@@ -61,7 +61,7 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                     }
 
                 const productos = document.querySelectorAll(".producto");
-                const botones = document.querySelectorAll(".boton");
+                const botones = document.querySelectorAll(".send");
 
                 
                     botones.forEach(boton => {

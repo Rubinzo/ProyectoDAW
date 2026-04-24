@@ -193,6 +193,25 @@ footer p {
     }
 }
 
+
+.send{
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    margin: 20px;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 0;
+}
+
+.send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
 /* Estilos del Carrito */
 #headerCarrito{
     height: 115px;
