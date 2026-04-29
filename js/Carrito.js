@@ -39,11 +39,14 @@ productos.forEach(element => {
     `
     precios.push(precio);
     precioProductos = parseFloat(precio) + precioProductos;
+    precioProductos = Math.round(precioProductos * 100) / 100;
     console.log(precioProductos)
 });
 
 const carritoResumen = document.getElementById("carritoResumen");
 let precioTotal = parseFloat(precioProductos.toFixed(1)) + 4.99;
+precioTotal = Math.round(precioTotal * 100) / 100;
+
 carritoResumen.innerHTML += `
         
             <h2>Resumen del pedido</h2>
@@ -57,9 +60,9 @@ carritoResumen.innerHTML += `
             </div>
             <div class="resumen-linea total">
                 <span>Total:</span>
-                <span id="total">${precioTotal}€</span>
+                <span id="total" data-total="${4.99}">${precioTotal}€</span>
             </div>
-            <button class="btn-comprar">Proceder al pago</button>
+            <button id="btn-comprar">Proceder al pago</button>
 `
 
 const btnMas = document.querySelectorAll(".btnMas");
@@ -78,7 +81,7 @@ function sumarPedido(evento){
     const pedidoParent = pedido.parentElement;
     const subtotal = pedidoParent.querySelector(".precio-subtotal");
     let precioSubTotal = pedidoParent.dataset.precio * (nuevaCantidad + 1);
-    console.log(subtotal)
+    console.log(precioSubTotal)
     subtotal.innerText = precioSubTotal.toFixed(2);
     console.log(precios)
     calcularTotalPrecio()
@@ -101,7 +104,7 @@ function restarPedido(evento){
         cantidad.dataset.cantidad = nuevaCantidad - 1;
         const pedidoParent = pedido.parentElement;
         const subtotal = pedidoParent.querySelector(".precio-subtotal");
-        let precioSubTotal = pedidoParent.dataset.precio * (nuevaCantidad - 1);
+        let precioSubTotal = pedidoParent.dataset.precio.toFixed * (nuevaCantidad - 1);
         console.log(subtotal)
         subtotal.innerText = precioSubTotal.toFixed(2);
         console.log(precios)
@@ -130,7 +133,49 @@ function calcularTotalPrecio(){
     subtotal.innerText = totalPrecio.toFixed(2);
     let totalPrecioEnvio = totalPrecio + 4.99;
     total.innerText = totalPrecioEnvio.toFixed(2);
+    total.dataset.total = totalPrecioEnvio.toFixed(2);
 }
 
+    //Pagar productos
+    const comprar = document.getElementById("btn-comprar");
+ 
+    comprar.addEventListener("click", function(){
 
-const comprar = document.getElementById("btn-comprar");
+        const modal = document.getElementById("modal");
+        const total = document.getElementById("total");
+        console.log(total)
+                modal.innerHTML = `
+                    <button id="cerrar">x</button>
+                    <p>Pago exitoso</p>
+                    <span>${total.dataset.total}€</span>
+            `;
+            const cerrarModal = document.getElementById("cerrar");
+            
+            cerrarModal.addEventListener('click', () => {
+                modal.close();
+            });
+            modal.showModal();
+        
+    });
+
+
+
+const eliminar = document.querySelectorAll(".btn-eliminar");
+
+                
+eliminar.forEach(boton => {
+    boton.addEventListener("click",eliminarProducto);
+});
+
+function eliminarProducto(evento){
+    const pedido = evento.target.parentElement;
+    console.log(pedido)
+    pedido.style.display = "none";
+}
+
+const flecha = document.getElementById("flecha");
+flecha.addEventListener("click", function(){
+    setTimeout(() =>{
+        window.location.href = "Tienda.html"; 
+    }, 1000);
+})

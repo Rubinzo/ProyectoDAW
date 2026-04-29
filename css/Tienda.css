@@ -28,6 +28,15 @@ header {
 .header-left {
     grid-area: left;
 }
+.header-left p{
+    font-size: 40px;
+    margin-left: 30px;
+}
+
+.header-left p:hover{
+    cursor: pointer;
+}
+
 
 .header-center {
     grid-area: center;
@@ -141,6 +150,8 @@ header::before {
     margin: 1rem 0;
 }
 
+
+
 /* Footer */
 footer {
     background: linear-gradient(135deg, #37474f 0%, #455a64 100%);
@@ -223,6 +234,8 @@ footer p {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    min-height: 100vh;
+
 }
 
 .carrito-item {
@@ -351,7 +364,7 @@ footer p {
     margin-top: 1rem;
 }
 
-.btn-comprar {
+#btn-comprar {
     width: 100%;
     padding: 1rem;
     border-radius: 10px;
@@ -366,7 +379,7 @@ footer p {
     margin-top: 1.5rem;
 }
 
-.btn-comprar:hover {
+#btn-comprar:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
@@ -413,3 +426,85 @@ footer p {
 #navCarrito{
     display: flex;
 }
+
+#modal {
+    /* Layout */
+    flex-direction: column; /* Apila el botón arriba y el texto abajo */
+    align-items: center;    /* Centra el texto horizontalmente */
+    
+    /* Posicionamiento */
+    justify-self: center;
+    margin-top: 200px;
+    padding: 20px;
+    
+    /* Estilo */
+    background-color: rgba(30, 60, 114); /* Azul con transparencia */
+    border-radius: 10px;
+    border: none;
+    min-width: 400px;
+}
+
+/* El botón de cerrar */
+#cerrar {
+    margin-left: 350px;
+    align-self: flex-end; /* ESTO lo mueve a la derecha */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+#modal p {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 20px 0; /* Espacio arriba y abajo del texto */
+}
+
+#modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal span {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 20px 0; /* Espacio arriba y abajo del texto */
+    margin-left: 10px;
+}
+
+#notificacion {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(30, 60, 114);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 6000;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.notificacion-oculta {
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.notificacion-visible {
+    opacity: 1;
+    transform: translateY(0);
+}   

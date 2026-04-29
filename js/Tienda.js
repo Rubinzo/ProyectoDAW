@@ -79,7 +79,8 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                 
 
 
- let productos = []
+let productos = []
+productos = localStorage.getItem("")
 function elegirProducto(evento){
    
     const producto = evento.target.parentElement;
@@ -102,6 +103,7 @@ function elegirProducto(evento){
         imgCarrito.src ="/Img/carrito-de-compras-lleno.png"
         productos.push(json);
         localStorage.setItem("seleccionados", JSON.stringify(productos))
+        mostrarNotificacion(producto.dataset.nombre);
     }else{
         for(let i = 0; i < productos.length; i++ ){
             console.log("Element" +productos[i])
@@ -114,6 +116,7 @@ function elegirProducto(evento){
                 console.log("Añadiendo producto2");
                 productos.push(json);
                 localStorage.setItem("seleccionados", JSON.stringify(productos));
+                mostrarNotificacion(producto.dataset.nombre);
         }
 
     }
@@ -135,3 +138,15 @@ borrar.addEventListener("click",function(){
     localStorage.setItem("seleccionados", "");
 
 });
+
+
+//notificacion
+function mostrarNotificacion(mensaje) {
+    const noti = document.getElementById("notificacion");
+    noti.innerText = mensaje;
+    noti.className = "notificacion-visible";
+    
+    setTimeout(() => {
+        noti.className = "notificacion-oculta";
+    }, 3000);
+}
