@@ -76,11 +76,19 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
 
 
 
-                
+let productos = []                
+console.log("Asdasd")
+
+if(localStorage.getItem("seleccionados").length > 2){
+    let localProductos = localStorage.getItem("seleccionados");
+    localProductos.forEach(element => {
+        productos.push(element);
+    });
+    console.log("hecho")
+}
 
 
-let productos = []
-productos = localStorage.getItem("")
+/*productos = localStorage.getItem("")´*/
 function elegirProducto(evento){
    
     const producto = evento.target.parentElement;
@@ -114,7 +122,9 @@ function elegirProducto(evento){
         }
         if(!igual){
                 console.log("Añadiendo producto2");
+                console.log(productos)
                 productos.push(json);
+                console.log(productos)
                 localStorage.setItem("seleccionados", JSON.stringify(productos));
                 mostrarNotificacion(producto.dataset.nombre);
         }
