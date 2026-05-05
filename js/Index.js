@@ -6,6 +6,7 @@ const contraseña1 = document.getElementById("contraseña1");
 const contraseña2 = document.getElementById("contraseña2");
 const validar = document.getElementById("validar");
 
+localStorage.clear();
 
 contraseña2.style.display = "none";
 validar.style.display = "none";

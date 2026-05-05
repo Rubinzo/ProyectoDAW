@@ -1,8 +1,12 @@
 console.log(localStorage.getItem("seleccionados"));
 
 let productos = localStorage.getItem("seleccionados");
-console.log("PRASDASD" +productos)
-productos = JSON.parse(productos)
+console.log("PRASDASD" +productos);
+if(!(productos === null)){
+    productos = JSON.parse(productos);
+}else{
+    console.log("No hay productos añadidos")
+}
 
 let precioProductos = 0;
 let cantidadProducto = 1;
@@ -169,10 +173,28 @@ eliminar.forEach(boton => {
 
 function eliminarProducto(evento){
     const pedido = evento.target.parentElement;
-    console.log(pedido)
+    console.log("Pedido a eliminar");
+    console.log(pedido);
+    const pedidoImg = pedido.querySelector(".carrito-img");
     pedido.style.display = "none";
+    let pedidoBorrar = "";
+    productos.forEach(element => {
+        if(element.nombre == pedidoImg.alt){
+            pedidoBorrar = element;
+        }
+    });
+    console.log(productos)
+    let indice = productos.indexOf(pedidoBorrar);
+    
+    if (indice !== -1) {
+        productos.splice(indice, 1);
+    }
+    console.log(productos);
+    localStorage.setItem("seleccionados", JSON.stringify(productos));
+
 }
 
+//Flecha Cambio de página
 const flecha = document.getElementById("flecha");
 flecha.addEventListener("click", function(){
     setTimeout(() =>{

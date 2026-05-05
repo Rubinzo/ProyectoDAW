@@ -1,6 +1,8 @@
 //Generar tarjetas
 const contenedorProductos = document.getElementById("contenedorProductos");
 
+const imgCarrito = document.getElementById("imgCarrito");
+
 
 //localStorage 
 const user = document.getElementById("user");
@@ -77,14 +79,18 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
 
 
 let productos = []                
-console.log("Asdasd")
 
-if(localStorage.getItem("seleccionados").length > 2){
-    let localProductos = localStorage.getItem("seleccionados");
-    localProductos.forEach(element => {
-        productos.push(element);
-    });
-    console.log("hecho")
+let datosCargados = localStorage.getItem("seleccionados");
+if(!(datosCargados === null)){
+    console.log("productos guardados")
+    let datosJSON = JSON.parse(datosCargados);
+    productos = datosJSON;
+    console.log("productos cargados")
+    console.log(productos);
+    imgCarrito.src ="/Img/carrito-de-compras-lleno.png";
+}else{
+    console.log(productos)
+    console.log("0 productos guardados")
 }
 
 
@@ -107,7 +113,6 @@ function elegirProducto(evento){
     
     let igual = false;
     if(productos.length == 0){
-        const imgCarrito = document.getElementById("imgCarrito");
         imgCarrito.src ="/Img/carrito-de-compras-lleno.png"
         productos.push(json);
         localStorage.setItem("seleccionados", JSON.stringify(productos))
