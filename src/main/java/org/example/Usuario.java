@@ -13,7 +13,8 @@ public class Usuario {
         JsonObject jsonRaiz = new JsonObject();
         JsonObject usuario = new JsonObject();
         // Definimos la consulta SQL que queremos ejecutar sobre la base de datos.
-        String sql = "SELECT * FROM usuarios";
+        String sql = "select nombre, contrasenia\n" +
+                "from cliente";
         JsonObject listaJson = new JsonObject();
         // try-with-resources: abre los recursos y los cierra automáticamente al terminar.
         // Establece la conexión con la base de datos usando nuestra clase ConnectionBBDD.
@@ -27,11 +28,10 @@ public class Usuario {
 
             while (rs.next()) {
                 // Obtiene los datos de cada columna ("id" y "nombre") y los imprime por consola.
-                System.out.println(rs.getInt("id") + " - " + rs.getString("usuario")  +" | " + rs.getString("contraseña"));
+                System.out.println(rs.getString("nombre")  +" | " + rs.getString("contrasenia"));
 
-                jsonRaiz.addProperty("id", rs.getInt("id"));
-                jsonRaiz.addProperty("usuario", rs.getString("usuario"));
-                jsonRaiz.addProperty("contraseña", rs.getString("contraseña"));
+                jsonRaiz.addProperty("usuario", rs.getString("nombre"));
+                jsonRaiz.addProperty("contraseña", rs.getString("contrasenia"));
 
 
             }
