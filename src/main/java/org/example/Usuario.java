@@ -46,7 +46,7 @@ public class Usuario {
 
     public boolean findByUser(String user) {
         boolean found = true;
-        String sql = "SELECT id, usuario FROM usuarios WHERE usuario = ?";
+        String sql = "SELECT nombre FROM cliente WHERE nombre = ?";
 
         try (Connection conn = ConnectionBBDD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -75,7 +75,7 @@ public class Usuario {
     public boolean comparePassword(String user, String contraseña) {
         JsonObject jsonRaiz = new JsonObject();
         boolean equal = false;
-        String sql = "SELECT id, usuario, contraseña FROM usuarios WHERE usuario = ?";
+        String sql = "SELECT nombre, contrasenia FROM cliente WHERE nombre = ?";
 
         try (Connection conn = ConnectionBBDD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -88,7 +88,7 @@ public class Usuario {
 
             if (rs.next()) {
                 // Si existe al menos un usuario con ese nombre...
-                String contraseñaBaseDatos = rs.getString("contraseña");
+                String contraseñaBaseDatos = rs.getString("contrasenia");
                 if (contraseñaBaseDatos.equals(contraseña)) {
                     equal = true;
                 }
@@ -179,7 +179,8 @@ public class Usuario {
 
 
     public void insertarUsuario(String usuario, String contraseña) {
-        String sql = "INSERT INTO usuarios (usuario, contraseña) VALUES (?, ?)";
+        String sql = "INSERT INTO CLIENTE (nombre, contrasenia, email, telefono, direccion_envio, ciudad, codigo_postal, pais, metodo_pago_preferido, fecha_registro)\n" +
+                "VALUES (?, ?, ' ', ' ', ' ', ' ', ' ', ' ',' ','01-01-2001');";
 
 
         try (Connection conn = ConnectionBBDD.getConnection();

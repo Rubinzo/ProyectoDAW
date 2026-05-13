@@ -75,9 +75,7 @@ public class UsuarioController {
                 response.addProperty("user", user);
                 response.addProperty("registrado", registrado);
                 response.addProperty("equal", equal);
-                if (registrado) {
-                    usuario.insertarUsuario(user, contraseña);
-                }
+
                 sendResponse(exchange, 200, response.toString());
                 return;
             }
