@@ -1,4 +1,4 @@
-# FutbolCamis - Proyecto DAW
+# DraftWEAR - Proyecto DAW
 
 ## Descripción del Proyecto
 
