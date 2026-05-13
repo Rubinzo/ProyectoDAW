@@ -155,3 +155,98 @@ CREATE TABLE PERSONALIZACION (
         REFERENCES LINEA_PEDIDO(id_linea_pedido)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+<h1>Inserts</h1>
+ <h2>Camisetas</h2>
+INSERT INTO LIGA_COMPETICION (nombre_liga, pais, tipo)
+VALUES 
+	('Seleccion', 'mundial', 'seleccion'),
+    ('LaLiga', 'España', 'club'),
+    ('Premier League', 'Inglaterra', 'club'),
+    ('Serie A', 'Italia', 'club'),
+	('Bundesliga', 'Alemania', 'club');
+
+INSERT INTO EQUIPO (nombre_equipo, id_liga)
+VALUES 
+	('Seleccion', 1),
+    ('Real Madrid', 2),
+    ('FC Barcelona', 2),
+    ('Sevilla FC', 2),
+    ('Bayern de Múnich', 5);
+
+INSERT INTO MARCA (nombre_marca)
+VALUES 
+    ('Nike'),
+    ('Adidas'),
+    ('Puma');
+
+INSERT INTO TEMPORADA (anio_inicio, anio_fin)
+VALUES 
+	(2025, 2026),
+	(2024, 2025),
+    (2023, 2024);
+
+INSERT INTO VERSION (tipo_version, descripcion, diferencia_precio)
+VALUES 
+    ('replica', 'Versión estándar para aficionados, corte cómodo.', 0.00),
+    ('authentic', 'Versión de jugador, tejido técnico y corte ajustado.', 20.00);
+
+
+INSERT INTO PRODUCTO_CAMISETA (nombre_producto, id_equipo, id_marca, id_temporada, id_version, img, precio_base)
+VALUES 
+    ('PRIMERA EQUIPACIÓN REAL MADRID 2024-25', 1, 2, 2, 2, 'https://tnorth.es/cdn/shop/files/RMCFMZ0195-01-1_1.webp?v=1773682744&width=832', 39.99),
+    ('PRIMERA EQUIPACIÓN SEVILLA 2024-2025', 3, 2, 2, 1, 'https://tnorth.es/cdn/shop/files/qeF7zREXHME3ifW.jpg?v=1773683280&width=832', 34.95),
+    ('PRIMERA EQUIPACIÓN BRASIL 2026 | MUNDIAL', 1, 2, 1, 3, 'https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832',20);
+
+<h2>Usuarios(No obligatorio)</h2>
+
+INSERT INTO CLIENTE (nombre, contrasenia, email, telefono, direccion_envio, ciudad, codigo_postal, pais, metodo_pago_preferido, fecha_registro)
+VALUES ('Álex', '1234', ' ', ' ', ' ', ' ', ' ', ' ',' ','01-01-2001');
+
+<h1>Selects</h1>
+<h2>Camisetas</h2>
+SELECT 
+    p.nombre_producto AS Producto,
+    e.nombre_equipo AS Equipo,
+    m.nombre_marca AS Marca,
+    p.img AS Img,
+    u.talla AS Talla,
+    u.precio_base AS Precio,
+    u.estado AS Disponibilidad
+FROM PRODUCTO_CAMISETA p
+JOIN EQUIPO e ON p.id_equipo = e.id_equipo
+JOIN LIGA_COMPETICION l ON e.id_liga = l.id_liga
+JOIN MARCA m ON p.id_marca = m.id_marca
+JOIN TEMPORADA t ON p.id_temporada = t.id_temporada
+JOIN VERSION v ON p.id_version = v.id_version;
+
+
+SELECT 
+    p.nombre_producto,
+    p.img,
+	p.precio_base
+FROM PRODUCTO_CAMISETA p
+
+<h2>Usuarios</h2>
+select nombre, contrasenia
+from cliente
+
+<h1>Delete (En caso de necesitar)</h1>
+DROP TABLE IF EXISTS CONDICION_DESCUENTO CASCADE;
+DROP TABLE IF EXISTS CLIENTE CASCADE;
+DROP TABLE IF EXISTS CAMISETA_UNIDAD CASCADE;
+DROP TABLE IF EXISTS PRODUCTO_CAMISETA CASCADE;
+DROP TABLE IF EXISTS VERSION CASCADE;
+DROP TABLE IF EXISTS TEMPORADA CASCADE;
+DROP TABLE IF EXISTS MARCA CASCADE;
+DROP TABLE IF EXISTS EQUIPO CASCADE;
+DROP TABLE IF EXISTS LIGA_COMPETICION CASCADE;
+
+
+TRUNCATE TABLE 
+    LIGA_COMPETICION, EQUIPO, MARCA, TEMPORADA, VERSION, 
+    PRODUCTO_CAMISETA, CAMISETA_UNIDAD, CLIENTE, 
+    CONDICION_DESCUENTO, PEDIDO, LINEA_PEDIDO, PERSONALIZACION 
+RESTART IDENTITY CASCADE;
+
+
