@@ -33,7 +33,7 @@ En el futuro me gustaría especializarme en **Ciberseguridad**, enfocándome esp
 
 ### Perfiles profesionales a seguir
 
-1. **Troy Hunt** (creador de Have I Been Pwned)  
+1. **S4vitar** 
    Referente mundial en seguridad web y breaches de datos. Excelente ejemplo de profesionalidad y divulgación en ciberseguridad.
 
 2. **Midudev** (Miguel Ángel Durán)  
