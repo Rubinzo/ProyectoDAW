@@ -9,19 +9,42 @@ if(!(productos === null)){
 }
 
 let precioProductos = 0;
-let cantidadProducto = 1;
+let cantidadProductos = 0;
+let stock = [];
+
+if(stock.length < 1){
+    productos.forEach(element => {
+        stock.push(1);
+        cantidadProductos++;
+    });
+}
+
+
+
+let stockCargado = localStorage.getItem("stock");
+if(!( stockCargado == null)){
+    console.log(JSON.parse(localStorage.getItem("stock")))
+    stock = JSON.parse(localStorage.getItem("stock"));
+}
+
+
+
 let precios = [];
 
+let indice = 0;
+console.log(stock)
 productos.forEach(element => {
     console.log(element)
-
+    
     //Crear productos selecionados
     const contenedorCarrito = document.getElementById("contenedorCarrito");
     const nombre = element.nombre;
     const precio = element.precio;
     const img = element.img;
+    const id = element.id;
+    const cantidadProducto = element.cantidadProducto;
     contenedorCarrito.innerHTML += `
-        <div class="carrito-item" data-precio="${precio}">
+        <div class="carrito-item" data-precio="${precio}" >
             <img src="${img}" alt="${nombre}" class="carrito-img">
                     <div class="carrito-info">
                         <h3>${nombre}</h3>
@@ -29,10 +52,11 @@ productos.forEach(element => {
                     </div>
                     <div class="carrito-controles" 
                     data-nombre="${nombre}"
-                    data-precio="${precio}" data-img="${img}">
+                    data-precio="${precio}" data-img="${img}" data-cantidadProducto="${cantidadProducto}"
+                    data-id="${id}">
                         <button class="btn-cantidad btnMenos">-</button>
-                        <span class="cantidad" data-cantidad="${cantidadProducto}"
-                        >${cantidadProducto}</span>
+                        <span class="cantidad" data-cantidad="${stock[indice]}"
+                        >${stock[indice]}</span>
                         <button class="btn-cantidad btnMas">+</button>
                     </div>
                     <div class="carrito-subtotal">
@@ -45,6 +69,7 @@ productos.forEach(element => {
     precioProductos = parseFloat(precio) + precioProductos;
     precioProductos = Math.round(precioProductos * 100) / 100;
     console.log(precioProductos)
+    indice++;
 });
 
 const carritoResumen = document.getElementById("carritoResumen");
@@ -89,6 +114,15 @@ function sumarPedido(evento){
     subtotal.innerText = precioSubTotal.toFixed(2);
     console.log(precios)
     calcularTotalPrecio()
+    for(let i = 0; i < productos.length; i++){
+        if(pedido.dataset.nombre == productos[i].nombre){
+            stock.splice(i, 1, (nuevaCantidad + 1));
+            console.log(nuevaCantidad +1);
+        }
+    }
+    console.log(pedido.dataset.cantidadproducto)
+    localStorage.setItem("stock", JSON.stringify(stock));
+    
 }
 
 
@@ -108,12 +142,21 @@ function restarPedido(evento){
         cantidad.dataset.cantidad = nuevaCantidad - 1;
         const pedidoParent = pedido.parentElement;
         const subtotal = pedidoParent.querySelector(".precio-subtotal");
-        let precioSubTotal = pedidoParent.dataset.precio.toFixed * (nuevaCantidad - 1);
+        let precioSubTotal = pedidoParent.dataset.precio * (nuevaCantidad - 1);
         console.log(subtotal)
+        console.log(pedidoParent.dataset.precio.toFixed)
         subtotal.innerText = precioSubTotal.toFixed(2);
         console.log(precios)
         calcularTotalPrecio()
     }
+    for(let i = 0; i < productos.length; i++){
+        if(pedido.dataset.nombre == productos[i].nombre){
+            stock.splice(i, 1, (nuevaCantidad - 1));
+            console.log(nuevaCantidad -1);
+        }
+    }
+    console.log(stock)
+    localStorage.setItem("stock", JSON.stringify(stock));
 
 }
 

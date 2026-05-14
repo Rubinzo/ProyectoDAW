@@ -106,7 +106,8 @@ function elegirProducto(evento){
         nombre: producto.dataset.nombre,
         precio: producto.dataset.precio,
         img: producto.dataset.img,
-        id: producto.dataset.id
+        id: producto.dataset.id,
+        cantidadProducto: 1
     }
 
 
@@ -132,6 +133,9 @@ function elegirProducto(evento){
                 console.log(productos)
                 localStorage.setItem("seleccionados", JSON.stringify(productos));
                 mostrarNotificacion(producto.dataset.nombre);
+                // let stock = JSON.parse(localStorage.getItem("stock"));
+                // stock.push(1);
+                // localStorage.setItem("stock", JSON.stringify(stock));
         }
 
     }
@@ -151,6 +155,7 @@ const borrar = document.getElementById("borrar");
 borrar.addEventListener("click",function(){
     console.log("Cache borrado");
     localStorage.setItem("seleccionados", "");
+    localStorage.setItem("stock", "");
 
 });
 
