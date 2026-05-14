@@ -79,7 +79,7 @@ He mejorado mucho mi capacidad para estructurar proyectos, crear interfaces din�
 
 **Mi contribución principal:** Desarrollo del **Frontend** (páginas, estilos, carrito de compras, interacciones y dinamismo).
 
-**Capturas de pantalla:** (añade aquí 3-4 capturas del proyecto)
+**Capturas de pantalla:** 
 
 **Aprendizaje clave:** Cómo transformar una idea en una aplicación web funcional y la importancia del trabajo en equipo usando Git.
 
