@@ -6,7 +6,7 @@ CREATE TABLE LIGA_COMPETICION (
     id_liga      SERIAL PRIMARY KEY,
     nombre_liga  VARCHAR(100) NOT NULL,
     pais         VARCHAR(100) NOT NULL,
-    tipo         VARCHAR(20) NOT NULL -- Antes: tipo_liga_enum ('club', 'seleccion')
+    tipo         VARCHAR(20) NOT NULL
 );
 
 <h1>-- EQUIPO</h1>
@@ -40,7 +40,7 @@ CREATE TABLE TEMPORADA (
 <br>
 CREATE TABLE VERSION (
     id_version        SERIAL PRIMARY KEY,
-    tipo_version      VARCHAR(20) NOT NULL, -- Antes: tipo_version_enum ('replica', 'authentic')
+    tipo_version      VARCHAR(20) NOT NULL, 
     descripcion       VARCHAR(255),
     diferencia_precio NUMERIC(10,2) NOT NULL CHECK (diferencia_precio >= 0)
 );
@@ -71,7 +71,7 @@ CREATE TABLE PRODUCTO_CAMISETA (
 CREATE TABLE CAMISETA_UNIDAD (
     id_camiseta_unidad SERIAL PRIMARY KEY,
     numero_serie       VARCHAR(50) NOT NULL UNIQUE,
-    estado             VARCHAR(20) NOT NULL DEFAULT 'disponible', -- Antes: estado_unidad_enum
+    estado             VARCHAR(20) NOT NULL DEFAULT 'disponible', 
     id_producto        INTEGER NOT NULL,
     talla              VARCHAR(10) NOT NULL,
     CONSTRAINT fk_unidad_producto FOREIGN KEY (id_producto)
@@ -114,7 +114,7 @@ CREATE TABLE PEDIDO (
     id_pedido                INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     id_cliente               INTEGER NOT NULL,
     fecha_pedido             TIMESTAMP NOT NULL DEFAULT NOW(),
-    estado                   VARCHAR(20) NOT NULL DEFAULT 'pendiente', -- Antes: estado_pedido_enum
+    estado                   VARCHAR(20) NOT NULL DEFAULT 'pendiente', 
     subtotal                 NUMERIC(10,2) NOT NULL CHECK (subtotal >= 0),
     descuento_aplicado       NUMERIC(10,2) NOT NULL DEFAULT 0 CHECK (descuento_aplicado >= 0),
     total                    NUMERIC(10,2) NOT NULL CHECK (total >= 0),
