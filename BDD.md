@@ -184,7 +184,22 @@ INSERT INTO TEMPORADA (anio_inicio, anio_fin)
 VALUES 
 	(2025, 2026),
 	(2024, 2025),
-    (2023, 2024);
+    (2023, 2024),
+	(2023, 2022),
+	(2022, 2021),
+    (2021, 2020),
+	(2020, 2019),
+	(2019, 2018),
+    (2018, 2017),
+	(2017, 2016),
+	(2016, 2015),
+    (2015, 2014),
+	(2014, 2013),
+    (2013, 2012),
+	(2012, 2011),
+	(2011, 2010),
+    (2010, 2009),
+    (2009, 2008);
 
 INSERT INTO VERSION (tipo_version, descripcion, diferencia_precio)
 VALUES 
@@ -194,9 +209,11 @@ VALUES
 
 INSERT INTO PRODUCTO_CAMISETA (nombre_producto, id_equipo, id_marca, id_temporada, id_version, img, precio_base)
 VALUES 
-    ('PRIMERA EQUIPACIÓN REAL MADRID 2024-25', 1, 2, 2, 2, 'https://tnorth.es/cdn/shop/files/RMCFMZ0195-01-1_1.webp?v=1773682744&width=832', 39.99),
-    ('PRIMERA EQUIPACIÓN SEVILLA 2024-2025', 3, 2, 2, 1, 'https://tnorth.es/cdn/shop/files/qeF7zREXHME3ifW.jpg?v=1773683280&width=832', 34.95),
-    ('PRIMERA EQUIPACIÓN BRASIL 2026 | MUNDIAL', 1, 2, 1, 3, 'https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832',20);
+    ('PRIMERA EQUIPACIÓN REAL MADRID 2024-25', 2, 2, 2, 2, 'https://tnorth.es/cdn/shop/files/RMCFMZ0195-01-1_1.webp?v=1773682744&width=832', 39.99),
+    ('PRIMERA EQUIPACIÓN SEVILLA 2024-2025', 4, 2, 2, 1, 'https://tnorth.es/cdn/shop/files/qeF7zREXHME3ifW.jpg?v=1773683280&width=832', 34.95),
+    ('PRIMERA EQUIPACIÓN BRASIL 2026 | MUNDIAL', 1, 2, 1, 2, 'https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832',39.99),
+	('EQUIPACIÓN RETRO FC BARCELONA 2008-09 (FINAL ROMA)', 3, 1, 18, 2, 'https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832',39.99);
+
 
 <h2>Usuarios(No obligatorio)</h2>
 
