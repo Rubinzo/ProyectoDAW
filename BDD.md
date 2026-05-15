@@ -172,7 +172,9 @@ VALUES
     ('Real Madrid', 2),
     ('FC Barcelona', 2),
     ('Sevilla FC', 2),
-    ('Bayern de Múnich', 5);
+    ('Bayern de Múnich', 5),
+	(Arsenal, 3),
+	(Milan, 4);
 
 INSERT INTO MARCA (nombre_marca)
 VALUES 
@@ -212,7 +214,14 @@ VALUES
     ('PRIMERA EQUIPACIÓN REAL MADRID 2024-25', 2, 2, 2, 2, 'https://tnorth.es/cdn/shop/files/RMCFMZ0195-01-1_1.webp?v=1773682744&width=832', 39.99),
     ('PRIMERA EQUIPACIÓN SEVILLA 2024-2025', 4, 2, 2, 1, 'https://tnorth.es/cdn/shop/files/qeF7zREXHME3ifW.jpg?v=1773683280&width=832', 34.95),
     ('PRIMERA EQUIPACIÓN BRASIL 2026 | MUNDIAL', 1, 2, 1, 2, 'https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832',39.99),
-	('EQUIPACIÓN RETRO FC BARCELONA 2008-09 (FINAL ROMA)', 3, 1, 18, 2, 'https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832',39.99);
+	('EQUIPACIÓN RETRO FC BARCELONA 2008-09 (FINAL ROMA)', 3, 1, 18, 2, 'https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832',39.99),
+	('TERCERA EQUIPACIÓN BAYERN MUNICH 2024-25', 5, 2, 2, 2, 'https://tnorth.es/cdn/shop/files/9H4Tk2Bf75aYrB4.jpg?v=1773683292&width=832',39.99),
+	('PRIMERA EQUIPACIÓN ARGENTINA 2026 | MUNDIAL', 1, 2, 1, 2, 'https://tnorth.es/cdn/shop/files/JM5897.jpg?v=1773682575&width=832',39.99),
+	('TERCERA EQUIPACIÓN ARSENAL FC 2025-26', 6, 2, 1, 2, 'https://tnorth.es/cdn/shop/files/iNebZZgEbn4ZouN.jpg?v=1773682590&width=1600',39.99),
+	('EQUIPACIÓN RETRO AC MILAN 2006-07', 7, 2, 1, 2, 'https://tnorth.es/cdn/shop/files/f2966003-scaled.jpg?v=1773682707&width=832',39.99);
+
+
+
 
 
 <h2>Usuarios(No obligatorio)</h2>
