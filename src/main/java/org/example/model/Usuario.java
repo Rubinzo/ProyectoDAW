@@ -1,13 +1,18 @@
-package org.example;
+package org.example.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.example.config.ConnectionBBDD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Usuario {
+    /**
+     * Método para listar usuarios de la base de datos
+     * @return
+     */
     public String listarUsuarios() {
         Gson gson = new Gson();
         JsonObject jsonRaiz = new JsonObject();
@@ -43,7 +48,11 @@ public class Usuario {
         return jsonRaiz.toString();
     }
 
-
+    /**
+     * Para encontrar usuarios con su nombre
+     * @param user
+     * @return
+     */
     public boolean findByUser(String user) {
         boolean found = true;
         String sql = "SELECT nombre FROM cliente WHERE nombre = ?";
@@ -72,6 +81,12 @@ public class Usuario {
         return found;
     }
 
+    /**
+     * Se ejecuta para comprobar los datos e insertar usuarios
+     * @param user
+     * @param contraseña
+     * @return
+     */
     public boolean comparePassword(String user, String contraseña) {
         JsonObject jsonRaiz = new JsonObject();
         boolean equal = false;
@@ -104,78 +119,12 @@ public class Usuario {
         return equal;
     }
 
-    public boolean findByDNI(String dni) {
-        boolean found = true;
-        String sql = "SELECT id, dni FROM usuarios WHERE dni = ?";
-
-        try (Connection conn = ConnectionBBDD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            // Sustituye el ? por el nombre que queremos buscar.
-            stmt.setString(1, dni);
-
-            // Ejecuta la consulta SELECT.
-            ResultSet rs = stmt.executeQuery();
-
-            if (!rs.next()) {
-                found = false;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return found;
-    }
-
-    public boolean findByEmail(String email) {
-        boolean found = true;
-        String sql = "SELECT id, email FROM usuarios WHERE email = ?";
-
-        try (Connection conn = ConnectionBBDD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            // Sustituye el ? por el nombre que queremos buscar.
-            stmt.setString(1, email);
-
-            // Ejecuta la consulta SELECT.
-            ResultSet rs = stmt.executeQuery();
-
-            if (!rs.next()) {
-                found = false;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return found;
-    }
-
-    public String comprobarContraseña(String email, String contraseña){
-        String mensaje = "noEmail";
-        if (findByEmail(email)) {
-            mensaje = "noContraseña";
-            String sql = "SELECT * FROM usuarios where contraseña = "+ contraseña;
-            try (Connection conn = ConnectionBBDD.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-                // Sustituye el ? por el nombre que queremos buscar.
-                stmt.setString(2, contraseña);
-
-                // Ejecuta la consulta SELECT.
-                ResultSet rs = stmt.executeQuery();
-
-                if (!rs.next()) {
-                    mensaje = "existe";
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mensaje;
-        }
-
-        return mensaje;
-    }
+    /**
+     * Insertar el usuario con los parámetros necesarios, simulamos que los demas no existen
+     * porque la base de datos es más grande de lo necesario para el modelo
+     * @param usuario
+     * @param contraseña
+     */
 
 
     public void insertarUsuario(String usuario, String contraseña) {
@@ -200,52 +149,5 @@ public class Usuario {
 
     }
 
-    public void deleteByName(String nombre) {
 
-        String sql = "DELETE FROM usuarios WHERE nombre = ?";
-
-        try (Connection conn = ConnectionBBDD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            // Sustituye el ? por el nombre del usuario a borrar.
-            stmt.setString(1, nombre);
-
-            // Ejecuta el DELETE y devuelve cuántas filas se eliminaron.
-            int filas = stmt.executeUpdate();
-
-            if (filas > 0) {
-                System.out.println("Usuario eliminado: " + nombre);
-                listarUsuarios();
-            } else {
-                System.out.println("No existe ningún usuario con el nombre: " + nombre);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void actualizarUsuario(String nombreActual, String nombreNuevo) {
-
-        String sql = "UPDATE usuarios SET nombre = ? WHERE nombre = ?";
-
-        try (Connection conn = ConnectionBBDD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, nombreNuevo);   // Nuevo nombre
-            stmt.setString(2, nombreActual);  // Nombre que buscamos para actualizar
-
-            int filas = stmt.executeUpdate(); // Ejecuta el UPDATE
-
-            if (filas > 0) {
-                System.out.println("Nombre actualizado de '" + nombreActual + "' a '" + nombreNuevo + "'.");
-                listarUsuarios();
-            } else {
-                System.out.println("No existe ningún usuario con el nombre: " + nombreActual);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
