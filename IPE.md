@@ -96,6 +96,8 @@ Hemos mejorado mucho la capacidad para estructurar proyectos, crear interfaces d
 
 **Capturas de pantalla:** 
 <img width="1909" height="1082" alt="Captura de pantalla 2026-05-15 191914" src="https://github.com/user-attachments/assets/96463c8a-8494-47a3-b36d-dd2fa584be27" />
+<img width="1914" height="1077" alt="Captura de pantalla 2026-05-15 211928" src="https://github.com/user-attachments/assets/0680cf9a-dfb6-4cec-81ea-278467d2b784" />
+
 <img width="1891" height="1080" alt="Captura de pantalla 2026-05-15 192051" src="https://github.com/user-attachments/assets/fbb1c084-5a50-4024-a104-bb7c25c352da" />
 
 
