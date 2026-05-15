@@ -186,6 +186,9 @@ php -S localhost:8000
 
 ### Backend
 
+** IMPORTANTE**
+Para ejecutar el back hay que ir a la rama BackDevelopTerminado y descargarse el código de esa rama
+
 | Herramienta | Justificación |
 |-------------|---------------|
 | **Java HttpServer** | Servidor HTTP embebido en Java estándar. No requiere dependencias externas para crear un servidor REST básico. Ideal para proyectos académicos |
