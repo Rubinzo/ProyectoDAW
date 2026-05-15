@@ -1,3 +1,4 @@
+//Constantes
 const inicio = document.getElementById("inicio");
 const texto = document.getElementById("texto");
 const send = document.getElementById("send");
@@ -6,32 +7,40 @@ const contraseña1 = document.getElementById("contraseña1");
 const contraseña2 = document.getElementById("contraseña2");
 const validar = document.getElementById("validar");
 
+//Limpiar cache al cargar
+localStorage.clear();
 
+//Register
 contraseña2.style.display = "none";
 validar.style.display = "none";
 let login = true;
+
+function limpiarCampos() {
+    usuario.value = "";
+    contraseña1.value = "";
+    contraseña2.value = "";
+}
+
+//Cambiar entre login y register
 inicio.addEventListener("click", function(){
-    if(login == true){
-        inicio.innerHTML = "Login";
+    login ? inicio.innerHTML = "Login" : inicio.innerHTML = "Register";
+    if(login){
         texto.innerHTML = "Register";
         send.innerHTML = "Registrarte";
-        usuario.value = "";
-        contraseña1.value = "";
+        limpiarCampos();
         contraseña2.style.display = "block";
         validar.style.display = "block";
         login = false;
     }else{
-        inicio.innerHTML = "Register";
         texto.innerHTML = "Login";
         send.innerHTML = "Iniciar sesión";
-        usuario.value = "";
-        contraseña1.value = "";
-        contraseña2.value = "";
+        limpiarCampos();
         contraseña2.style.display = "none";
         validar.style.display = "none";
         login = true;
     }
 });
+
 const myHeaders = new Headers();
 
 send.addEventListener("click", sesion);
@@ -46,7 +55,52 @@ function sesion() {
     let contraseña;
 
     if(login == true){
+        usuarioValue = usuario.value;
+        contraseña = contraseña1.value;
+        console.log("Nombre: " , usuarioValue);
+        console.log("Contraseña: " , contraseña);
+        let json = {
+            usuario: usuario.value,
+            contraseña: contraseña1.value
+        };
+        console.log(json)
+        const sendLogin = {
+            method: "POST",
+            headers: myHeaders,
+            redirect: "follow",
+            body: JSON.stringify(json)
+        };
+        localStorage.setItem("usuario", usuario.value);
+        usuario.value = "";
+        contraseña1.value = "";
+        fetch("http://localhost:8080/user/login", sendLogin)
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result);
 
+                    if(result.registrado == true){
+                        if(result.equal == true){
+                            mensaje.innerText = "Sesión iniciada correctamente";
+                            mensaje.style.color = "green";
+                            setTimeout(() =>{
+                                window.location.href = "Tienda.html"; 
+                            }, 1500);
+                        }else{
+                            mensaje.innerText ="La contraseña no es correcta";
+                            mensaje.style.color = "red";
+                            setTimeout(() =>{
+                                mensaje.innerText ="";
+                            }, 1500);
+                        }
+                    }else{
+                        mensaje.innerText ="Ese usuario no está registrado";
+                        mensaje.style.color = "red";
+                        setTimeout(() =>{
+                            mensaje.innerText ="";
+                        }, 1500);
+                    }
+                })
+                .catch((error) => console.error(error));
     }else{
         if (contraseña1.value == contraseña2.value) {
             usuarioValue = usuario.value;
@@ -72,9 +126,10 @@ function sesion() {
                 .then((result) => {
                     console.log(result);
 
-                    if(result.registrado == false){
+                    if(result.registrado == true){
                         mensaje.innerText = "Usuario registrado correctamente";
                         mensaje.style.color = "green";
+                        localStorage.setItem("usuario", result.user);
                         setTimeout(() =>{
                             window.location.href = "Tienda.html"; 
                         }, 1500);
@@ -100,4 +155,10 @@ function sesion() {
 
 }
 
-
+//Carrusel
+  let currentIndex = 1;
+  const totalSlides = 3;
+  setInterval(() => {
+    currentIndex = (currentIndex % totalSlides) + 1;
+    document.getElementById(`slide-${currentIndex}`).checked = true;
+  }, 4000);

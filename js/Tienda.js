@@ -1,6 +1,13 @@
 //Generar tarjetas
 const contenedorProductos = document.getElementById("contenedorProductos");
 
+const imgCarrito = document.getElementById("imgCarrito");
+
+
+//localStorage 
+const user = document.getElementById("user");
+let usuario = localStorage.getItem("usuario");
+user.innerText = usuario;
     
 const myHeaders = new Headers();
 const getCamisetas = {
@@ -17,14 +24,22 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                         const nombre = result[i].nombre;
                         const precio = result[i].precio;
                         const img = result[i].img;
+                        const pais = result[i].pais;
+                        const seleccion = result[i].seleccion;
+                        const equipo = result[i].equipo;
 
+                        
 
                         contenedorProductos.innerHTML += `
-                        <div class="producto" data-nombre = ${nombre} 
-                        data-status="activo">
+                        <div class="producto" data-nombre = "${nombre}" 
+                        data-status="null" data-pais="${pais}" 
+                        data-seleccion="${seleccion}" data-equipo="${equipo}"
+                        data-precio="${precio}" data-img="${img}"
+                        data-id="${i}"
                             <p>${nombre}</p>
                             <img src="${img}" alt="${nombre}">
                             <p>${precio}€</p>
+                            <button class="send">Añadir</button>
                         </div>
                         `;
 
@@ -38,18 +53,130 @@ fetch("http://localhost:8080/stock/camisetas", getCamisetas)
                         for(let i = 0; i < result.length; i++){
                             let nombreInput = result[i].nombre.toLowerCase();
                             if(nombreInput.includes(inputNombre.value.toLowerCase())){
-                                console.log("coincide")
                                 producto[i].style.display ="block";
                             
                             }else{
-                                console.log("No coincide");
                                 producto[i].style.display = "none";
                                 
                             }
                         }
                     }
+
+                const productos = document.querySelectorAll(".producto");
+                const botones = document.querySelectorAll(".send");
+
+                
+                    botones.forEach(boton => {
+                        boton.addEventListener("click",elegirProducto)
+                    });
+                    
                 })
                 .catch((error) => console.error(error));
 
-//Buscador por nombre
 
+
+
+
+
+let productos = []                
+
+let datosCargados = localStorage.getItem("seleccionados");
+if(!(datosCargados === null)){
+    console.log("productos guardados")
+    let datosJSON = JSON.parse(datosCargados);
+    productos = datosJSON;
+    console.log("productos cargados")
+    console.log(productos);
+    imgCarrito.src ="/Img/carrito-de-compras-lleno.png";
+}else{
+    console.log(productos)
+    console.log("0 productos guardados")
+}
+
+
+/*productos = localStorage.getItem("")´*/
+function elegirProducto(evento){
+   
+    const producto = evento.target.parentElement;
+    console.log(producto.dataset);
+    let precio = Number(producto.dataset.precio);
+    
+
+    let json = {
+        nombre: producto.dataset.nombre,
+        precio: producto.dataset.precio,
+        img: producto.dataset.img,
+        id: producto.dataset.id,
+        cantidadProducto: 1
+    }
+
+
+    
+    let igual = false;
+    if(productos.length == 0){
+        imgCarrito.src ="/Img/carrito-de-compras-lleno.png"
+        productos.push(json);
+        localStorage.setItem("seleccionados", JSON.stringify(productos))
+        mostrarNotificacion(producto.dataset.nombre);
+    }else{
+        for(let i = 0; i < productos.length; i++ ){
+            console.log("Element" +productos[i])
+            if(JSON.stringify(productos[i]) === JSON.stringify(json)){
+                console.log("igual");
+                igual = true;
+            }
+        }
+        if(!igual){
+                console.log("Añadiendo producto2");
+                console.log(productos)
+                productos.push(json);
+                console.log(productos)
+                localStorage.setItem("seleccionados", JSON.stringify(productos));
+                mostrarNotificacion(producto.dataset.nombre);
+                if(localStorage.getItem("stock") == null){
+                    let stock = [];
+                    stock.push(1);
+                    localStorage.setItem("stock", JSON.stringify(stock))
+                }
+                let stock = JSON.parse(localStorage.getItem("stock"));
+                stock.push(1);
+                localStorage.setItem("stock", JSON.stringify(stock));
+        }
+
+    }
+
+    console.log(productos)
+    
+}
+const carritoBoton = document.getElementById("carritoBoton");
+carritoBoton.addEventListener("click",function(){
+    if(!(localStorage.getItem("seleccionados") == null)){
+        setTimeout(() =>{
+            window.location.href = "Carrito.html"; 
+        }, 1000);
+    }else{
+        console.log("no hay productos seleccionados");
+    }
+
+});
+
+//Borrar cache
+// const borrar = document.getElementById("borrar");
+// borrar.addEventListener("click",function(){
+//     console.log("Cache borrado");
+//     localStorage.setItem("seleccionados", "");
+//     localStorage.setItem("stock", "");
+
+// });
+
+
+//notificacion
+function mostrarNotificacion(mensaje) {
+    const noti = document.getElementById("notificacion");
+    noti.innerText = mensaje;
+    noti.className = "notificacion-visible";
+    
+    setTimeout(() => {
+        noti.className = "notificacion-oculta";
+    }, 3000);
+}

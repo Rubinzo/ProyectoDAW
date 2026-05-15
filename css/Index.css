@@ -70,12 +70,14 @@ input:focus{
 
 /*--------------------------------------*/
 
+
 body{
+    margin: 0;
     font-family: 'Arial', sans-serif;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 0.5fr 1fr 2fr;
+    grid-template-rows: 20% 60% 20%;
     grid-template-areas: 
         "header header header"
         "espacio1 login carrusel"
@@ -83,15 +85,55 @@ body{
     background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
 }
 
-header{
+header {
+    grid-area: header;
+    height: 50px;
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
     padding: 2rem 0;
-    text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
-    grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:  "left center right";
+}
+
+
+.header-center {
+    grid-area: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 3s infinite;
+}
+
+.header-center p {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 footer{
@@ -102,4 +144,143 @@ footer{
     box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
     grid-area: footer;
+}
+
+#mensaje{
+    text-align: center;
+}
+
+/*----------------------------Carrusel------------------------------------------*/
+            .slide {
+                grid-area: carrusel;
+                margin: 20px;
+                margin-right: 50px;
+                position: relative;
+                box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+                margin-top: 26px;
+                width: 100%;
+                max-width: 550px;
+            }
+            .slide-inner {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+            }
+            .slide-open:checked + .slide-item {
+                position: static;
+                opacity: 100;
+            }
+            .slide-item {
+                position: absolute;
+                opacity: 0;
+                -webkit-transition: opacity 0.6s ease-out;
+                transition: opacity 0.6s ease-out;
+            }
+            .slide-item img {
+                display: block;
+                height: auto;
+                max-width: 100%;
+            }
+            .slide-control {
+                background: rgba(0, 0, 0, 0.28);
+                border-radius: 50%;
+                color: #fff;
+                cursor: pointer;
+                display: none;
+                font-size: 40px;
+                height: 40px;
+                line-height: 35px;
+                position: absolute;
+                top: 50%;
+                -webkit-transform: translate(0, -50%);
+                cursor: pointer;
+                -ms-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+                text-align: center;
+                width: 40px;
+                z-index: 10;
+            }
+            .slide-control.prev {
+                left: 2%;
+            }
+            .slide-control.next {
+                right: 2%;
+            }
+            .slide-control:hover {
+                background: rgba(0, 0, 0, 0.8);
+                color: #aaaaaa;
+            }
+            #slide-1:checked ~ .control-1,
+            #slide-2:checked ~ .control-2,
+            #slide-3:checked ~ .control-3 {
+                display: block;
+            }
+            .slide-indicador {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                bottom: 2%;
+                left: 0;
+                right: 0;
+                text-align: center;
+                z-index: 10;
+            }
+            .slide-indicador li {
+                display: inline-block;
+                margin: 0 5px;
+            }
+            .slide-circulo {
+                color: #828282;
+                cursor: pointer;
+                display: block;
+                font-size: 35px;
+            }
+            .slide-circulo:hover {
+                color: #aaaaaa;
+            }
+            #slide-1:checked ~ .control-1 ~ .slide-indicador 
+                 li:nth-child(1) .slide-circulo,
+            #slide-2:checked ~ .control-2 ~ .slide-indicador 
+                  li:nth-child(2) .slide-circulo,
+            #slide-3:checked ~ .control-3 ~ .slide-indicador 
+                  li:nth-child(3) .slide-circulo {
+                color: #428bca;
+            }
+            #titulo {
+                width: 100%;
+                position: absolute;
+                padding: 0px;
+                margin: 0px auto;
+                text-align: center;
+                font-size: 27px;
+                color: rgba(255, 255, 255, 1);
+                font-family: 'Open Sans', sans-serif;
+                z-index: 9999;
+                text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.33), 
+                     -1px 0px 2px rgba(255, 255, 255, 0);
+            }
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: 
+            "header"
+            "login"
+            "carrusel"
+            "footer";
+    }
+
+    #contenedor {
+        justify-self: center;
+        margin: 20px;
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .slide {
+        width: 90%;
+        margin: 20px auto;
+    }
 }
