@@ -1,3 +1,4 @@
+//Constantes
 const inicio = document.getElementById("inicio");
 const texto = document.getElementById("texto");
 const send = document.getElementById("send");
@@ -6,8 +7,10 @@ const contraseña1 = document.getElementById("contraseña1");
 const contraseña2 = document.getElementById("contraseña2");
 const validar = document.getElementById("validar");
 
+//Limpiar cache al cargar
 localStorage.clear();
 
+//Register
 contraseña2.style.display = "none";
 validar.style.display = "none";
 let login = true;
@@ -18,6 +21,7 @@ function limpiarCampos() {
     contraseña2.value = "";
 }
 
+//Cambiar entre login y register
 inicio.addEventListener("click", function(){
     login ? inicio.innerHTML = "Login" : inicio.innerHTML = "Register";
     if(login){
@@ -151,7 +155,7 @@ function sesion() {
 
 }
 
-
+//Carrusel
   let currentIndex = 1;
   const totalSlides = 3;
   setInterval(() => {

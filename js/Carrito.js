@@ -1,7 +1,7 @@
 console.log(localStorage.getItem("seleccionados"));
 
 let productos = localStorage.getItem("seleccionados");
-console.log("PRASDASD" +productos);
+console.log("Productos" +productos);
 if(!(productos === null)){
     productos = JSON.parse(productos);
 }else{
@@ -12,6 +12,7 @@ let precioProductos = 0;
 let cantidadProductos = 0;
 let stock = [];
 
+//Crear stock 1
 if(stock.length < 1){
     productos.forEach(element => {
         stock.push(1);
@@ -43,6 +44,9 @@ productos.forEach(element => {
     const img = element.img;
     const id = element.id;
     const cantidadProducto = element.cantidadProducto;
+    let subtotalIndividual = parseFloat(precio) * stock[indice];
+    precioProductos += subtotalIndividual;
+    
     contenedorCarrito.innerHTML += `
         <div class="carrito-item" data-precio="${precio}" >
             <img src="${img}" alt="${nombre}" class="carrito-img">
@@ -60,7 +64,7 @@ productos.forEach(element => {
                         <button class="btn-cantidad btnMas">+</button>
                     </div>
                     <div class="carrito-subtotal">
-                        <p class="precio-subtotal">${precio}</p>
+                        <p class="precio-subtotal">${subtotalIndividual.toFixed(2)}</p>
                     </div>
                     <button class="btn-eliminar">Eliminar</button>
                 </div>
@@ -71,7 +75,7 @@ productos.forEach(element => {
     console.log(precioProductos)
     indice++;
 });
-
+//Crear div pagar
 const carritoResumen = document.getElementById("carritoResumen");
 let precioTotal = parseFloat(precioProductos.toFixed(1)) + 4.99;
 precioTotal = Math.round(precioTotal * 100) / 100;
@@ -101,6 +105,7 @@ btnMas.forEach(boton => {
     boton.addEventListener("click",sumarPedido);
 });
 
+//Funciones de botones
 function sumarPedido(evento){
     const pedido = evento.target.parentElement;
     const cantidad = pedido.querySelector(".cantidad");
@@ -137,7 +142,7 @@ function restarPedido(evento){
     const pedido = evento.target.parentElement;
     const cantidad = pedido.querySelector(".cantidad");
     let nuevaCantidad = parseInt(cantidad.innerText);
-    if(!(nuevaCantidad == 0)){
+    if((nuevaCantidad > 1)){
         cantidad.innerText = nuevaCantidad - 1;
         cantidad.dataset.cantidad = nuevaCantidad - 1;
         const pedidoParent = pedido.parentElement;
@@ -148,7 +153,8 @@ function restarPedido(evento){
         subtotal.innerText = precioSubTotal.toFixed(2);
         console.log(precios)
         calcularTotalPrecio()
-    }
+        
+
     for(let i = 0; i < productos.length; i++){
         if(pedido.dataset.nombre == productos[i].nombre){
             stock.splice(i, 1, (nuevaCantidad - 1));
@@ -157,6 +163,8 @@ function restarPedido(evento){
     }
     console.log(stock)
     localStorage.setItem("stock", JSON.stringify(stock));
+    }
+
 
 }
 
@@ -168,14 +176,18 @@ function calcularTotalPrecio(){
 
     const pedidos = document.querySelectorAll(".carrito-item");
     let totalPrecio = 0;
+    console.log(pedidos)
     pedidos.forEach(element => {
-        let suma = parseFloat(element.dataset.precio);
-        // console.log("Precio " + suma);
-        const cantidad = element.querySelector(".cantidad");
-        suma = parseFloat(suma.toFixed(2)) * parseFloat(cantidad.dataset.cantidad);
-        totalPrecio = parseFloat(totalPrecio.toFixed(2)) + suma;
-        // console.log("suma " + parseFloat(cantidad.dataset.cantidad))
-        // console.log(suma)
+        if(!(element.style.display === "none")){
+            let suma = parseFloat(element.dataset.precio);
+            // console.log("Precio " + suma);
+            const cantidad = element.querySelector(".cantidad");
+            suma = parseFloat(suma.toFixed(2)) * parseFloat(cantidad.dataset.cantidad);
+            totalPrecio = parseFloat(totalPrecio.toFixed(2)) + suma;
+            // console.log("suma " + parseFloat(cantidad.dataset.cantidad))
+            // console.log(suma)
+        }
+
     });
     subtotal.innerText = totalPrecio.toFixed(2);
     let totalPrecioEnvio = totalPrecio + 4.99;
@@ -231,10 +243,13 @@ function eliminarProducto(evento){
     
     if (indice !== -1) {
         productos.splice(indice, 1);
+        stock = JSON.parse(localStorage.getItem("stock"));
+        stock.splice(indice, 1);
+        localStorage.setItem("stock", JSON.stringify(stock));
     }
     console.log(productos);
     localStorage.setItem("seleccionados", JSON.stringify(productos));
-
+    calcularTotalPrecio();
 }
 
 //Flecha Cambio de página
@@ -244,3 +259,6 @@ flecha.addEventListener("click", function(){
         window.location.href = "Tienda.html"; 
     }, 1000);
 })
+
+//Calcular precio al cargar la pagina
+calcularTotalPrecio()

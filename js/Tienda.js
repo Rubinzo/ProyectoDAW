@@ -133,9 +133,14 @@ function elegirProducto(evento){
                 console.log(productos)
                 localStorage.setItem("seleccionados", JSON.stringify(productos));
                 mostrarNotificacion(producto.dataset.nombre);
-                // let stock = JSON.parse(localStorage.getItem("stock"));
-                // stock.push(1);
-                // localStorage.setItem("stock", JSON.stringify(stock));
+                if(localStorage.getItem("stock") == null){
+                    let stock = [];
+                    stock.push(1);
+                    localStorage.setItem("stock", JSON.stringify(stock))
+                }
+                let stock = JSON.parse(localStorage.getItem("stock"));
+                stock.push(1);
+                localStorage.setItem("stock", JSON.stringify(stock));
         }
 
     }
@@ -145,19 +150,24 @@ function elegirProducto(evento){
 }
 const carritoBoton = document.getElementById("carritoBoton");
 carritoBoton.addEventListener("click",function(){
-    setTimeout(() =>{
-        window.location.href = "Carrito.html"; 
-    }, 1000);
+    if(!(localStorage.getItem("seleccionados") == null)){
+        setTimeout(() =>{
+            window.location.href = "Carrito.html"; 
+        }, 1000);
+    }else{
+        console.log("no hay productos seleccionados");
+    }
+
 });
 
 //Borrar cache
-const borrar = document.getElementById("borrar");
-borrar.addEventListener("click",function(){
-    console.log("Cache borrado");
-    localStorage.setItem("seleccionados", "");
-    localStorage.setItem("stock", "");
+// const borrar = document.getElementById("borrar");
+// borrar.addEventListener("click",function(){
+//     console.log("Cache borrado");
+//     localStorage.setItem("seleccionados", "");
+//     localStorage.setItem("stock", "");
 
-});
+// });
 
 
 //notificacion
