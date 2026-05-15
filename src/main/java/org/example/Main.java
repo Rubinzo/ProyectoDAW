@@ -2,13 +2,18 @@ package org.example;
 
 
 import com.sun.net.httpserver.HttpServer;
+import org.example.config.ConnectionBBDD;
+import org.example.model.Camisetas;
+import org.example.model.Usuario;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class Main {
     static void main(String[] args) {
-
+        /**
+         * Conexion con base de datos
+         */
         try {
             ConnectionBBDD.getConnection();
             System.out.println("Conexión correcta a PostgreSQL.");
@@ -31,6 +36,9 @@ public class Main {
 
             System.out.println("Servidor iniciado en http://localhost:8080/user/register");
             Camisetas camisetas = new Camisetas();
+        /**
+         * En caso de querer insertar desde java usar esta estructura
+         */
 //            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN REAL MADRID 2024-25", 39.99, "https://tnorth.es/cdn/shop/files/RMCFMZ0195-01-1_1.webp?v=1773682744&width=832", "España", false, "Real Madrid");
 //            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN SEVILLA 2024-2025", 34.95, "https://tnorth.es/cdn/shop/files/qeF7zREXHME3ifW.jpg?v=1773683280&width=832", "España", false, "Sevilla");
 //            camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN BRASIL 2026 | MUNDIAL", 39.99, "https://tnorth.es/cdn/shop/files/camiseta-nike-brasil-primera-equipacion-mundial-2026.webp?v=1774617513&width=832", "Brasil", true, "Brasil");
@@ -38,8 +46,12 @@ public class Main {
 //        camisetas.insertarCamisetas("TERCERA EQUIPACIÓN BAYERN MUNICH 2024-25", 39.99, "https://tnorth.es/cdn/shop/files/9H4Tk2Bf75aYrB4.jpg?v=1773683292&width=832", "Alemania", false, "Bayern Munich");
 //        camisetas.insertarCamisetas("PRIMERA EQUIPACIÓN ARGENTINA 2026 | MUNDIAL", 39.99, "https://tnorth.es/cdn/shop/files/JM5897.jpg?v=1773682575&width=832", "Argentina", true, "Argentina");
             camisetas.listarCamisetas();
-    }
+     }
 
+    /**
+     * Abrir el servidor
+     * @throws IOException
+     */
     public static void crearServer() throws IOException {
         // Se crea el servior y desde qué puerto va estar escuchando
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);

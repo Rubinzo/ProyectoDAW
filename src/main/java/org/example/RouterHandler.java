@@ -13,7 +13,11 @@ public class RouterHandler implements HttpHandler {
     private final UsuarioController usuarioController = new UsuarioController();
     private final CamisetaController camisetaController = new CamisetaController();
 
-
+    /**
+     * Manejar las direcciones para los endpoints
+     * @param exchange
+     * @throws IOException
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 

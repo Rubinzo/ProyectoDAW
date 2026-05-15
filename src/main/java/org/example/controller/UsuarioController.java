@@ -3,7 +3,7 @@ package org.example.controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpExchange;
-import org.example.Usuario;
+import org.example.model.Usuario;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,6 +19,11 @@ public class UsuarioController {
     private static HttpClient client = HttpClient.newHttpClient();
     Usuario usuario = new Usuario();
 
+    /**
+     * Para manejar los endpoint de usuario
+     * @param exchange
+     * @throws IOException
+     */
     public void handle(HttpExchange exchange) throws IOException {
 
         String method = exchange.getRequestMethod();
@@ -81,10 +86,10 @@ public class UsuarioController {
             }
 
 
-            sendResponse(exchange, 404, "Endpoint dogs no válido");
+            sendResponse(exchange, 404, "Endpoint  no válido");
 
         } catch (Exception e) {
-            sendResponse(exchange, 500, "Error llamando a la API dogs");
+            sendResponse(exchange, 500, "Error llamando");
         }
     }
 
@@ -119,20 +124,13 @@ public class UsuarioController {
     }
 
     public class Message{
-        List<String> dogs;
+        List<String> camisetas;
 
-        public List<String> getDogs() {
-            return dogs;
-        }
-
-        public void setDogs(List<String> dogs) {
-            this.dogs = dogs;
-        }
 
         @Override
         public String toString() {
             return "Message{" +
-                    "dogs=" + dogs +
+                    "camisetas=" + camisetas +
                     '}';
         }
     }

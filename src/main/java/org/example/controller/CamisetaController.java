@@ -2,10 +2,9 @@ package org.example.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpExchange;
-import org.example.Camisetas;
-import org.example.Usuario;
+import org.example.model.Camisetas;
+import org.example.model.Usuario;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,7 +12,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class CamisetaController {
@@ -21,6 +19,12 @@ public class CamisetaController {
     private static HttpClient client = HttpClient.newHttpClient();
     Usuario usuario = new Usuario();
 
+    /**
+     * Para manejar los endpoints
+     * Mandar la lista de camisetas de la BDD
+     * @param exchange
+     * @throws IOException
+     */
     public void handle(HttpExchange exchange) throws IOException {
 
         String method = exchange.getRequestMethod();
@@ -44,10 +48,10 @@ public class CamisetaController {
 
 
 
-            sendResponse(exchange, 404, "Endpoint dogs no válido");
+            sendResponse(exchange, 404, "Endpoint no válido");
 
         } catch (Exception e) {
-            sendResponse(exchange, 500, "Error llamando a la API dogs");
+            sendResponse(exchange, 500, "Error llamando");
         }
     }
 
@@ -81,26 +85,15 @@ public class CamisetaController {
         os.close();
     }
 
-    public class Message{
-        List<String> dogs;
-
-        public List<String> getDogs() {
-            return dogs;
-        }
-
-        public void setDogs(List<String> dogs) {
-            this.dogs = dogs;
-        }
-
-        @Override
-        public String toString() {
-            return "Message{" +
-                    "dogs=" + dogs +
-                    '}';
-        }
-    }
 
 
+    /**
+     * Método que crea el http
+     * @param apiUrl
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static HttpResponse<String> requestHTTP(String apiUrl) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
@@ -113,7 +106,10 @@ public class CamisetaController {
     }
 
 
-
+    /**
+     * Cors para la web
+     * @param exchange
+     */
     private static void addCorsHeaders(HttpExchange exchange) {
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
