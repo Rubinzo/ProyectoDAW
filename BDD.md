@@ -173,8 +173,8 @@ VALUES
     ('FC Barcelona', 2),
     ('Sevilla FC', 2),
     ('Bayern de Múnich', 5),
-	(Arsenal, 3),
-	(Milan, 4);
+	('Arsenal', 3),
+	('Milan', 4);
 
 INSERT INTO MARCA (nombre_marca)
 VALUES 
